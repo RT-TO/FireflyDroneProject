@@ -60,3 +60,12 @@ Quaternion bodyToEarth(Quaternion q, Quaternion v_b) {
     return res;
 }
 
+double getAltitude(double pressure, double temperature) {
+    // Pressures(Pa)
+    // Temperature(Celcius)
+
+    double temp_K = temperature + 273.15;
+    double ratio = pressure / 101325.0;
+    double altitude = (temp_K / 0.0065) * (1 - pow(ratio, (287.05 * 0.0065 / 9.80665)));
+    return altitude;
+}
