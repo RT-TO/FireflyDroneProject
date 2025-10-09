@@ -24,7 +24,15 @@ void quatNormalize(Quaternion *q) {
     q->z /= norm;
 }
 
-void quadGyroUpdate(Quaternion *q, double gx, double gy, double gz, double dt) {
+Quaternion quatConjugate(Quaternion q) {
+    Quaternion res = q;
+    res.x = -q.x;
+    res.y = -q.y;
+    res.z = -q.z;
+    return res;
+}
+
+void quatGyroUpdate(Quaternion *q, double gx, double gy, double gz, double dt) {
     Quaternion q_gyro = {0, gx, gy, gz};
     //运算
     Quaternion q_tnext = quatMultiply(*q, q_gyro);
@@ -40,3 +48,15 @@ void quadGyroUpdate(Quaternion *q, double gx, double gy, double gz, double dt) {
     //归一
     quatNormalize(q);
 }
+
+void acceAngleComp(Quaternion *q, double ax, double ay, double az, double dt) {
+    //TODO
+}
+
+Quaternion bodyToEarch(Quaternion q, Quaternion v_b) {
+    //q 机体姿态, v_b 机体坐标系
+    Quaternion q_con = quatConjugate(q);
+    Quaternion res = quatMultiply(quatMultiply(q, v_b), q_con);
+    return res;
+}
+
