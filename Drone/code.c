@@ -53,7 +53,7 @@ void acceAngleComp(Quaternion *q, double ax, double ay, double az, double dt) {
     //TODO
 }
 
-Quaternion bodyToEarch(Quaternion q, Quaternion v_b) {
+Quaternion bodyToEarth(Quaternion q, Quaternion v_b) {
     //q 机体姿态, v_b 机体坐标系
     Quaternion q_con = quatConjugate(q);
     Quaternion res = quatMultiply(quatMultiply(q, v_b), q_con);
