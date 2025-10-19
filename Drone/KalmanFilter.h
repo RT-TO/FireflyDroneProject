@@ -2,6 +2,7 @@
 #define KALMANFILTER_H
 
 #include <stdbool.h>
+#include <stdio.h>
 #include "quaternion.h"
 
 typedef struct {

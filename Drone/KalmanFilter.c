@@ -1,4 +1,5 @@
 #include <stdbool.h>
+#include <stdio.h>
 #include "quaternion.h"
 
 typedef struct {
@@ -157,7 +158,7 @@ void update(MEKF *model, const double z[3], const double v_I[3], const double R[
     }
     //S^-1
     double invS[3][3];
-    if (!mat3_inverse(S, invS)) {
+    if (!matrix3_inverse(S, invS)) {
         printf("WARNING:: inverse uncessfully, skip update \n");
         return;
     }

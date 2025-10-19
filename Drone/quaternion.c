@@ -1,13 +1,6 @@
 #include <math.h>
 #include "quaternion.h"
 
-typedef struct {
-    double w;
-    double x;
-    double y;
-    double z;
-} Quaternion;
-
 Quaternion quatMultiply(Quaternion q1, Quaternion q2) {
     Quaternion res;
     res.w = q1.w*q2.w - q1.x*q2.x - q1.y*q2.y - q1.z*q2.z;
