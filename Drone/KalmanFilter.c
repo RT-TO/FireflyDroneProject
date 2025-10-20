@@ -1,11 +1,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include "quaternion.h"
-
-typedef struct {
-    Quaternion q;
-    double P[3][3]; // Err Cov Matrix
-} MEKF;
+#include "KalmanFilter.h"
 
 //cross product of vector
 void cross_product(const double a[3], const double b[3], double res[3]) {

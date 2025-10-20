@@ -1,4 +1,5 @@
 #include "quaternion.h"
+#include "KalmanFilter.h"
 
 
 void quatGyroUpdate(Quaternion *q, double gx, double gy, double gz, double dt) {
@@ -18,8 +19,31 @@ void quatGyroUpdate(Quaternion *q, double gx, double gy, double gz, double dt) {
     quatNormalize(q);
 }
 
-void acceAngleComp(Quaternion *q, double ax, double ay, double az, double dt) {
-    //TODO
+void MEKF_filter(double dt, const double Q[3][3], const double R[3][3]) {
+    MEKF filter;
+    mekf_init(&filter);
+    int ax_raw, ay_raw, az_raw;
+    int gx_raw, gy_raw, gz_raw;
+    double v_I[3] = {0, 0, 1};
+    // read the data function
+    // mpu6050_r(&ax_raw, &ay_raw, &az_raw, &gx_raw, &gy_raw, &gz_raw);
+    double omega[3] = {
+        // TODO
+        // Angle Transfer
+        // Well idk how to do it so its not my work lmao
+        // QwQ......
+    };
+    double accel[3] = {
+        // TODO
+        // Dont know how to do as well 
+        // QAQ.......
+    };
+    mekf_predict(&filter, omega, dt, Q);
+    double acc_norm = sqrt(accel[0]*accel[0] + accel[1]*accel[1] + accel[2]*accel[2]);
+    double z[3] = { accel[0]/acc_norm, accel[1]/acc_norm, accel[2]/acc_norm };
+    mekf_update(&filter, z, v_I, R);
+    double roll, pitch, yaw;
+    // TODO :: A quat to euler function here
 }
 
 Quaternion bodyToEarth(Quaternion q, Quaternion v_b) {
